@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HackMaster AI</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+    body {
+      background: radial-gradient(circle at top, #27135f, #070914 55%, #03040a);
+      color: white;
+      min-height: 100vh;
+    }
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 22px 8%; border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .logo { font-size: 24px; font-weight: bold; }
+    .logo span { color: #9b5cff; }
+    nav a {
+      color: #ddd; text-decoration: none; margin-left: 22px; font-size: 14px;
+    }
+    .lang {
+      background: rgba(255,255,255,0.08); color: white; border: 1px solid rgba(255,255,255,0.2);
+      padding: 8px 12px; border-radius: 12px;
+    }
+    .hero {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+      padding: 80px 8%; align-items: center;
+    }
+    .badge {
+      display: inline-block; padding: 8px 14px; border: 1px solid #7c5cff;
+      border-radius: 999px; color: #cbbcff; margin-bottom: 22px;
+      background: rgba(124,92,255,0.12);
+    }
+    h1 { font-size: 58px; line-height: 1.05; margin-bottom: 22px; }
+    h1 span { color: #9b5cff; }
+    p { color: #cfd3e6; line-height: 1.7; font-size: 17px; }
+    .buttons { margin-top: 30px; display: flex; gap: 14px; flex-wrap: wrap; }
+    button {
+      border: none; padding: 14px 22px; border-radius: 14px;
+      color: white; font-weight: bold; cursor: pointer;
+      background: linear-gradient(135deg, #8b5cf6, #2563eb);
+    }
+    .secondary {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
+    }
+    .dashboard {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 28px; padding: 24px;
+      box-shadow: 0 0 60px rgba(124,92,255,0.25);
+      backdrop-filter: blur(15px);
+    }
+    .card {
+      background: rgba(6,10,25,0.75);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px; padding: 18px; margin-bottom: 16px;
+    }
+    .score {
+      font-size: 44px; font-weight: bold; color: #6ee7b7;
+    }
+    .grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+      padding: 30px 8% 70px;
+    }
+    .feature {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 22px; padding: 24px;
+      min-height: 180px;
+    }
+    .feature h3 { margin-bottom: 12px; color: #fff; }
+    .section-title {
+      text-align: center; font-size: 34px; margin-top: 20px;
+    }
+    footer {
+      text-align: center; padding: 25px; color: #999;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    @media (max-width: 850px) {
+      .hero, .grid { grid-template-columns: 1fr; }
+      h1 { font-size: 40px; }
+      nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">HackMaster <span>AI</span></div>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">AI Strategist</a>
+    <a href="#">Hackathons</a>
+    <a href="#">ATS CV</a>
+    <a href="#">Mentors</a>
+  </nav>
+  <select class="lang">
+    <option>EN</option>
+    <option>العربية</option>
+    <option>Français</option>
+    <option>Español</option>
+    <option>한국어</option>
+  </select>
+</header>
+
+<section class="hero">
+  <div>
+    <div class="badge">AI-Powered Hackathon & Career Ecosystem</div>
+    <h1>From Raw Idea to <span>Winning Project</span></h1>
+    <p>
+      AI-powered platform that helps innovators transform ideas into winning hackathon projects
+      through AI strategy, ATS-ready CV building, mentorship, MVP planning, pitch generation,
+      and hackathon discovery.
+    </p>
+    <div class="buttons">
+      <button>Start with AI Strategist</button>
+      <button class="secondary">Explore Hackathons</button>
+      <button class="secondary">Try Live Demo</button>
+    </div>
+  </div>
+
+  <div class="dashboard">
+    <div class="card">
+      <h3>Win Probability</h3>
+      <div class="score">82%</div>
+      <p>Strong idea with clear impact and MVP potential.</p>
+    </div>
+    <div class="card">
+      <h3>MVP Roadmap</h3>
+      <p>Research → Design → AI Model → Dashboard → Pitch Deck</p>
+    </div>
+    <div class="card">
+      <h3>AI Judge Score</h3>
+      <div class="score">86/100</div>
+      <p>Improve business model and competitive advantage.</p>
+    </div>
+  </div>
+</section>
+
+<h2 class="section-title">What HackMaster AI Does</h2>
+
+<section class="grid">
+  <div class="feature">
+    <h3>AI Strategist</h3>
+    <p>Turns your raw idea into a complete project plan with problem, solution, MVP, risks, and judging criteria.</p>
+  </div>
+  <div class="feature">
+    <h3>ATS CV Builder</h3>
+    <p>Builds clean ATS-ready resumes and suggests keywords based on jobs, internships, and tech opportunities.</p>
+  </div>
+  <div class="feature">
+    <h3>Hackathon Discovery</h3>
+    <p>Helps users find local and global hackathons, understand requirements, and prepare submissions.</p>
+  </div>
+  <div class="feature">
+    <h3>Mentorship</h3>
+    <p>Offers AI mentors and premium human mentors for idea review, technical planning, and pitch preparation.</p>
+  </div>
+  <div class="feature">
+    <h3>Marketplace</h3>
+    <p>Connects visionaries with developers, designers, AI engineers, pitch deck creators, and judges.</p>
+  </div>
+  <div class="feature">
+    <h3>Pitch & MVP Support</h3>
+    <p>Generates pitch deck structure, MVP architecture, budget plan, and launch roadmap.</p>
+  </div>
+</section>
+
+<footer>
+  HackMaster AI © 2026 — Built for innovators, dreamers, and future winners.
+</footer>
+
+</body>
+</html>
