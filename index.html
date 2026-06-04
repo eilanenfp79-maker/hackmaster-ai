@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HackMaster AI</title>
+<style>
+:root{
+  --bg:#070816;
+  --card:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.14);
+  --text:#ffffff;
+  --muted:#b9c0d4;
+  --purple:#9b5cff;
+  --blue:#38bdf8;
+  --green:#5eead4;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{
+  background:
+    radial-gradient(circle at 10% 10%,rgba(155,92,255,.35),transparent 30%),
+    radial-gradient(circle at 90% 5%,rgba(56,189,248,.25),transparent 28%),
+    linear-gradient(180deg,#070816,#0b1020);
+  color:var(--text);
+  min-height:100vh;
+}
+header{
+  position:sticky;top:0;z-index:20;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px 7%;
+  background:rgba(7,8,22,.8);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.logo{font-size:24px;font-weight:900}
+.logo span{color:var(--purple)}
+nav{display:flex;gap:18px}
+nav a{color:var(--muted);text-decoration:none;font-size:14px;cursor:pointer}
+nav a:hover{color:white}
+select{
+  background:#111827;color:white;border:1px solid var(--border);
+  padding:9px 12px;border-radius:12px;
+}
+.hero{
+  display:grid;grid-template-columns:1.05fr .95fr;gap:35px;
+  padding:80px 7% 40px;align-items:center;
+}
+.badge{
+  display:inline-block;margin-bottom:20px;padding:9px 14px;
+  border:1px solid rgba(155,92,255,.5);
+  border-radius:999px;color:#ddd6fe;background:rgba(155,92,255,.12);
+}
+h1{font-size:56px;line-height:1.05;margin-bottom:20px}
+h1 span{background:linear-gradient(90deg,var(--purple),var(--blue));-webkit-background-clip:text;color:transparent}
+p{color:var(--muted);line-height:1.8;font-size:16px}
+.buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+button{
+  border:0;border-radius:14px;padding:13px 20px;color:white;
+  font-weight:800;cursor:pointer;background:linear-gradient(135deg,var(--purple),#2563eb);
+}
+button:hover{transform:translateY(-2px)}
+.secondary{background:rgba(255,255,255,.08);border:1px solid var(--border)}
+.panel{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:28px;padding:22px;backdrop-filter:blur(18px);
+  box-shadow:0 25px 80px rgba(0,0,0,.35);
+}
+.mini-card{
+  background:rgba(3,7,18,.7);border:1px solid var(--border);
+  border-radius:20px;padding:18px;margin-bottom:14px;
+}
+.score{font-size:42px;color:var(--green);font-weight:900}
+.section{padding:55px 7%}
+.section-title{text-align:center;font-size:34px;margin-bottom:12px}
+.section-sub{text-align:center;max-width:760px;margin:0 auto 35px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:22px;padding:22px;min-height:170px;
+}
+.card h3{margin-bottom:10px;color:white}
+.page{display:none}
+.page.active{display:block}
+.form{
+  max-width:900px;margin:auto;background:var(--card);border:1px solid var(--border);
+  border-radius:26px;padding:24px;
+}
+input,textarea{
+  width:100%;background:#0f172a;color:white;border:1px solid var(--border);
+  border-radius:14px;padding:14px;margin:10px 0;font-size:15px;
+}
+textarea{min-height:120px}
+.result{display:none;margin-top:18px}
+.tag{
+  display:inline-block;padding:7px 11px;border-radius:999px;
+  background:rgba(94,234,212,.12);color:#99f6e4;margin:6px 6px 0 0;font-size:13px;
+}
+footer{text-align:center;color:#8d95aa;padding:30px;border-top:1px solid var(--border)}
+@media(max-width:900px){
+  .hero,.grid{grid-template-columns:1fr}
+  h1{font-size:40px}
+  nav{display:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">HackMaster <span>AI</span></div>
+  <nav>
+    <a onclick="showPage('home')" data-en="Home" data-ar="الرئيسية">Home</a>
+    <a onclick="showPage('strategist')" data-en="AI Strategist" data-ar="محلل الأفكار">AI Strategist</a>
+    <a onclick="showPage('hackathons')" data-en="Hackathons" data-ar="الهاكاثونات">Hackathons</a>
+    <a onclick="showPage('cv')" data-en="ATS CV" data-ar="السيرة الذاتية">ATS CV</a>
+    <a onclick="showPage('mentors')" data-en="Mentors" data-ar="المرشدون">Mentors</a>
+  </nav>
+  <select id="lang" onchange="changeLang()">
+    <option value="en">English</option>
+    <option value="ar">العربية</option>
+  </select>
+</header>
+
+<main id="home" class="page active">
+  <section class="hero">
+    <div>
+      <div class="badge" data-en="AI-Powered Hackathon & Career Ecosystem" data-ar="منصة ذكية للهاكاثونات والمسار المهني">AI-Powered Hackathon & Career Ecosystem</div>
+      <h1 id="heroTitle">From Raw Idea to <span>Winning Project</span></h1>
+      <p id="heroDesc">HackMaster AI helps innovators transform ideas into winning hackathon projects through AI strategy, ATS-ready CV building, mentorship, MVP planning, pitch generation, and hackathon discovery.</p>
+      <div class="buttons">
+        <button onclick="showPage('strategist')" data-en="Start with AI Strategist" data-ar="ابدأ بتحليل فكرتك">Start with AI Strategist</button>
+        <button class="secondary" onclick="showPage('hackathons')" data-en="Explore Hackathons" data-ar="استكشف الهاكاثونات">Explore Hackathons</button>
+        <button class="secondary" onclick="demoAlert()" data-en="Try Live Demo" data-ar="جرّب الديمو">Try Live Demo</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="mini-card">
+        <h3 data-en="Win Probability" data-ar="احتمالية الفوز">Win Probability</h3>
+        <div class="score">82%</div>
+        <p data-en="Strong idea with clear impact and MVP potential." data-ar="فكرة قوية ذات أثر واضح وقابلة لبناء MVP.">Strong idea with clear impact and MVP potential.</p>
+      </div>
+      <div class="mini-card">
+        <h3 data-en="MVP Roadmap" data-ar="خطة بناء النموذج الأولي">MVP Roadmap</h3>
+        <p>Idea → Validation → MVP → Pitch → Judge → Launch</p>
+      </div>
+      <div class="mini-card">
+        <h3 data-en="AI Judge Notes" data-ar="ملاحظات المحكم الذكي">AI Judge Notes</h3>
+        <p data-en="Improve revenue model and competitor comparison." data-ar="حسّني نموذج الربح والمقارنة مع المنافسين.">Improve revenue model and competitor comparison.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title" data-en="What HackMaster AI Does" data-ar="ماذا يقدم HackMaster AI؟">What HackMaster AI Does</h2>
+    <p class="section-sub" data-en="One platform for strategy, CV, mentors, MVP, pitch decks, and hackathon discovery." data-ar="منصة واحدة للاستراتيجية والسيرة الذاتية والمرشدين والنموذج الأولي والعرض واكتشاف الهاكاثونات.">One platform for strategy, CV, mentors, MVP, pitch decks, and hackathon discovery.</p>
+    <div class="grid">
+      <div class="card"><h3>AI Strategist</h3><p>Transforms raw ideas into complete project plans.</p></div>
+      <div class="card"><h3>ATS CV Builder</h3><p>Creates ATS-ready resumes with keyword suggestions.</p></div>
+      <div class="card"><h3>Hackathon Discovery</h3><p>Finds local and global hackathons with clear requirements.</p></div>
+      <div class="card"><h3>AI Judge</h3><p>Scores projects and reveals weak points before submission.</p></div>
+      <div class="card"><h3>Marketplace</h3><p>Connects visionaries with developers, designers, and mentors.</p></div>
+      <div class="card"><h3>Pitch Generator</h3><p>Builds a clear pitch structure for judges and investors.</p></div>
+    </div>
+  </section>
+</main>
+
+<section id="strategist" class="page section">
+  <div class="form">
+    <h2>AI Strategist</h2>
+    <p>Write your idea and get a project analysis.</p>
+    <input id="ideaTitle" placeholder="Project title">
+    <textarea id="ideaDesc" placeholder="Describe your idea"></textarea>
+    <button onclick="analyzeIdea()">Analyze Idea</button>
+    <div id="ideaResult" class="mini-card result"></div>
+  </div>
+</section>
+
+<section id="hackathons" class="page section">
+  <h2 class="section-title">Hackathon Discovery</h2>
+  <div class="grid">
+    <div class="card"><h3>NASA Space Apps</h3><p>Global · Hybrid · Space Tech</p><button onclick="hackathonInfo('NASA Space Apps')">Analyze</button></div>
+    <div class="card"><h3>AI for Good</h3><p>Online · AI · Social Impact</p><button onclick="hackathonInfo('AI for Good')">Analyze</button></div>
+    <div class="card"><h3>Climate Hack</h3><p>Sustainability · Energy · Environment</p><button onclick="hackathonInfo('Climate Hack')">Analyze</button></div>
+  </div>
+</section>
+
+<section id="cv" class="page section">
+  <div class="form">
+    <h2>ATS CV Builder</h2>
+    <p>Enter your information and get an ATS-style review.</p>
+    <input id="name" placeholder="Your name">
+    <input id="role" placeholder="Target role">
+    <textarea id="skills" placeholder="Your skills and projects"></textarea>
+    <button onclick="buildCV()">Analyze CV</button>
+    <div id="cvResult" class="mini-card result"></div>
+  </div>
+</section>
+
+<section id="mentors" class="page section">
+  <h2 class="section-title">Mentorship Hub</h2>
+  <div class="grid">
+    <div class="card"><h3>AI Mentor</h3><p>Instant guidance for ideas, MVPs, and pitches.</p><button onclick="alert('AI Mentor: Tell me your project idea.')">Chat</button></div>
+    <div class="card"><h3>Human Mentor</h3><p>Premium sessions with experts and judges.</p><button onclick="alert('Booking feature coming soon.')">Book</button></div>
+    <div class="card"><h3>AI Judge</h3><p>Get a score and improvement plan.</p><button onclick="alert('AI Judge Score: 86/100. Improve revenue model.')">Evaluate</button></div>
+  </div>
+</section>
+
+<footer>HackMaster AI © 2026</footer>
+
+<script>
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function analyzeIdea(){
+  const title=document.getElementById('ideaTitle').value || 'Smart Campus Energy';
+  const desc=document.getElementById('ideaDesc').value || 'A platform to reduce energy waste in universities.';
+  const box=document.getElementById('ideaResult');
+  box.style.display='block';
+  box.innerHTML=`
+    <h3>Project Analysis</h3>
+    <p><b>Title:</b> ${title}</p>
+    <p><b>Description:</b> ${desc}</p>
+    <span class="tag">Win Probability: 82%</span>
+    <span class="tag">MVP Ready</span>
+    <span class="tag">Needs Business Model</span>
+    <p><b>Recommended MVP:</b> Dashboard, prediction alerts, energy reports, and admin panel.</p>
+    <p><b>Weak Point:</b> Add competitor analysis and revenue model.</p>
+  `;
+}
+
+function buildCV(){
+  const name=document.getElementById('name').value || 'User';
+  const role=document.getElementById('role').value || 'AI Intern';
+  const skills=document.getElementById('skills').value || 'Python, AI, React, Hackathons';
+  const box=document.getElementById('cvResult');
+  box.style.display='block';
+  box.innerHTML=`
+    <h3>ATS CV Review</h3>
+    <p><b>Name:</b> ${name}</p>
+    <p><b>Target Role:</b> ${role}</p>
+    <p><b>Skills:</b> ${skills}</p>
+    <span class="tag">ATS Score: 91%</span>
+    <span class="tag">Keyword Match: Strong</span>
+    <p><b>Tip:</b> Add measurable achievements and project links.</p>
+  `;
+}
+
+function hackathonInfo(name){
+  alert(name + ': Requirements include idea, team, MVP demo, pitch deck, and judging criteria alignment.');
+}
+
+function demoAlert(){
+  alert('Live Demo: write an idea, get MVP plan, AI judge score, and pitch structure.');
+}
+
+function changeLang(){
+  const lang=document.getElementById('lang').value;
+  document.documentElement.lang=lang;
+  document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+
+  document.querySelectorAll('[data-en]').forEach(el=>{
+    el.innerText = lang==='ar' ? el.dataset.ar : el.dataset.en;
+  });
+
+  if(lang==='ar'){
+    document.getElementById('heroTitle').innerHTML='من فكرة بسيطة إلى <span>مشروع فائز</span>';
+    document.getElementById('heroDesc').innerText='منصة تساعد المبتكرين على تحويل الأفكار إلى مشاريع هاكاثون ناجحة من خلال الاستراتيجية الذكية، السيرة الذاتية ATS، الإرشاد، تخطيط MVP، إنشاء العروض، واكتشاف الهاكاثونات.';
+  }else{
+    document.getElementById('heroTitle').innerHTML='From Raw Idea to <span>Winning Project</span>';
+    document.getElementById('heroDesc').innerText='HackMaster AI helps innovators transform ideas into winning hackathon projects through AI strategy, ATS-ready CV building, mentorship, MVP planning, pitch generation, and hackathon discovery.';
+  }
+}
+</script>
+
+</body>
+</html>
